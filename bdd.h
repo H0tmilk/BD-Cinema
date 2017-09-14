@@ -15,11 +15,10 @@ void afficherNation();
 void afficherPersonne();
 
 void ajouterFilm();
-void supprimerFilm();
-void ajouterActeur();
 void supprimerActeur();
 void ajouterRealisateur();
 void supprimerRealisateur();
+void supprimerFilm();
 
 // Ecriture fichiers
 void sauvegarderFilms();

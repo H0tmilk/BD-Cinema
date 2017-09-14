@@ -1,9 +1,11 @@
 #ifndef data-struct.h
 #define dat-struct.h
 
+// On se limite aux genres que nous utiliserons
 typedef enum Genre {ACTION, HORREUR, COMEDIE, DOCUMENTAIRE, POLICIER, DRAME, ANIMATION,SCIENCEFICTION} Genre;
 
-typedef enum Nation{FRANCE} Nation;
+// On se limite aux nations que nous utiliserons
+typedef enum Nation{FRANCEn USA, CANADA} Nation;
 
 typedef struct date{
     int annee;

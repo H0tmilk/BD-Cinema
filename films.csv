@@ -1,0 +1,13 @@
+typedef struct film {
+    unsigned int id;
+    char* titre;
+    int an_sortie;
+    realisateur real;
+    acteur acteurs[3];
+    int duree;
+    Genre genre;
+} film;
+
+1;Titanic;1997;3;2,6;150;DRAME;
+2;OSS117;2006;4;1,7;COMEDIE;
+3;
