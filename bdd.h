@@ -1,18 +1,18 @@
-#ifndef bdd.h
-#define bdd.h
+#ifndef bdd
+#define bdd
 
 // Lecture du fichier
-personne* readActeurs();
-personne* readRealisateurs();
-film* readFilms();
+void readActeurs(personne*);
+void readRealisateurs(personne*);
+void readFilms(film*);
 
 // Gestion à faire en mémoire
 personne* getActeurById(int);
 personne* getRealById(int);
 
 void afficherFilm(film);
-void afficherNation();
-void afficherPersonne();
+void afficherNation(Nation);
+void afficherPersonne(personne);
 
 void ajouterFilm();
 void supprimerActeur();
