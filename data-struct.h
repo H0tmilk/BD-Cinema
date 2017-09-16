@@ -26,8 +26,8 @@ typedef struct film {
     unsigned int id;
     char* titre;
     int an_sortie;
-    realisateur real;
-    acteur acteurs[3];
+    personne real;
+    personne acteurs[3];
     int duree;
     Genre genre;
 } film;
