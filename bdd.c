@@ -8,7 +8,7 @@
 
 
 personne* getPersonneById(int id, personne* tab, int taille){
-    int i=0;
+    int i;
     for( i=0;i<taille;++i){
         printf("%d ",tab[i].id);
         if(tab[i].id == id){

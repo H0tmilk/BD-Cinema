@@ -1,5 +1,10 @@
-#ifndef bdd
-#define bdd
+#ifndef BDD_H
+#define BDD_H
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "data-struct.h"
 
 // Lecture du fichier
 personne* readActeurs();
@@ -13,15 +18,19 @@ void afficherFilm(film);
 void afficherNation(Nation);
 void afficherPersonne(personne);
 
-void ajouterFilm();
-void supprimerActeur();
-void ajouterRealisateur();
-void supprimerRealisateur();
-void supprimerFilm();
+film rechercherFilm(char* film);
+personne rechercherActeur(char* acteur);
+personne rechecherReal(char* real);
+
+// void ajouterFilm();
+// void supprimerActeur();
+// void ajouterRealisateur();
+// void supprimerRealisateur();
+// void supprimerFilm();
 
 // Ecriture fichiers
-void sauvegarderFilms();
-void sauvegarderActeurs();
-void sauvegarderReals();
+// void sauvegarderFilms();
+// void sauvegarderActeurs();
+// void sauvegarderReals();
 
 #endif
