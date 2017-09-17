@@ -9,7 +9,7 @@
 // Lecture du fichier
 personnes* readActeurs();
 personnes* readRealisateurs();
-film* readFilms(personnes* acteurs,  personnes* reals);
+Films* readFilms(personnes* acteurs,  personnes* reals);
 
 // Gestion à faire en mémoire
 personne* getPersonneById(int id, personne* tab, int taille);
@@ -18,9 +18,12 @@ void afficherFilm(film);
 void afficherNation(Nation);
 void afficherPersonne(personne);
 
-film rechercherFilm(char* film);
+film* searchFilm(int id, film* films, int taille);
+film* searchFilmByName(char* titre, film* films, int taille);
 personne rechercherActeur(char* acteur);
 personne rechecherReal(char* real);
+
+void libererPersonnes(personnes* p);
 
 // void ajouterFilm();
 // void supprimerActeur();

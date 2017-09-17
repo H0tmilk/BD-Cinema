@@ -15,7 +15,12 @@ int main( int argc, char* args[] )
     personnes* real = readRealisateurs();
 
     printf("\n Films :\n");
-    film* films = readFilms(acteurs, real );
+    Films* films = readFilms(acteurs, real );
+
+    printf("\nRecherche\n");
+
+    film* f = searchFilm(1,films->film,films->taille);
+    printf("Le film avec l'id %d a pour titre %s",f->id,f->titre);
 
 
     libererPersonnes(acteurs);

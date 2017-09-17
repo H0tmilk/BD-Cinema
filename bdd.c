@@ -156,7 +156,7 @@ personnes* readRealisateurs(){
     return NULL;
 }
 
-film* readFilms(personnes* acteurs,  personnes* reals){
+Films* readFilms(personnes* acteurs,  personnes* reals){
     FILE* fichier = NULL;
     fichier = fopen("films.csv","r");
     film* films = malloc(sizeof(film));
@@ -165,7 +165,7 @@ film* readFilms(personnes* acteurs,  personnes* reals){
 
     if(fichier != NULL){
         int i=0,j,k;
-        char temp[MAX], *temp2, *act;
+        char temp[MAX], *act;
 
         while(fgets(chaine,MAX,fichier)!=NULL){
             films = realloc(films,(i+1)*sizeof(film));
@@ -178,8 +178,9 @@ film* readFilms(personnes* acteurs,  personnes* reals){
 
             // titre
             mot = strtok(NULL,";");
-            films[i].titre = mot;
-            printf("Nom = %s, ",films[i].titre);
+            films[i].titre=(char*) malloc((strlen(mot)+1)*sizeof(char));
+            strcpy(films[i].titre , mot);
+            printf("%s, ",films[i].titre);
 
             // sortie
             mot = strtok(NULL,";");
@@ -197,12 +198,12 @@ film* readFilms(personnes* acteurs,  personnes* reals){
 
             mot = strtok(NULL,";");
             strcpy(temp,mot);
-            strcpy(temp2,mot);
             mot = strtok(NULL,";");
             char* last = strtok(NULL,";");
-
-            printf("%s",mot);
-            for (j=0; temp2[j]; temp2[j]==',' ? j++ : *temp2++);
+            for (k=0, j=0; temp[k]; k++){
+                 j+= (temp[k] == ',');
+            }
+            printf("%d",k);
             act = strtok(temp,",");
             for(k=0;k<=j;k++){
                 films[i].acteurs[k] = getPersonneById((unsigned int) strtol(act,(char**)NULL,10), acteurs->pers,acteurs->taille);
@@ -228,9 +229,15 @@ film* readFilms(personnes* acteurs,  personnes* reals){
             printf("Genre = %d",films[i].genre);
 
             printf("\n");
+            i++;
         }
+
+        Films* f = malloc(sizeof(Films));
+        f->film = films;
+
+        f->taille =i;
         fclose(fichier);
-        return films;
+        return f;
     }
     else {
         printf("Erreur d'ouverture du fichier");
@@ -245,4 +252,27 @@ void libererPersonnes(personnes* p){
         free(p->pers[i].prenom);
     }
 }
+
+film* searchFilm(int id, film* films, int taille){
+    int i;
+    while( i<taille){
+        if(films[i].id == id){
+            return &films[i];
+        }
+        i++;
+    }
+    return NULL;
+}
+
+film* searchFilmByName(char* titre, film* films, int taille){
+    int i;
+    while( i<taille){
+        if(strcmp(titre, films[i].titre)==0){
+            return &films[i];
+        }
+        i++;
+    }
+    return NULL;
+}
+
 
