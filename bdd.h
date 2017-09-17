@@ -2,13 +2,12 @@
 #define bdd
 
 // Lecture du fichier
-void readActeurs(personne*);
-void readRealisateurs(personne*);
-void readFilms(film*);
+personne* readActeurs();
+personne* readRealisateurs();
+film* readFilms();
 
 // Gestion à faire en mémoire
-personne* getActeurById(int);
-personne* getRealById(int);
+personne* getPersonneById(int id, personne* tab, int taille);
 
 void afficherFilm(film);
 void afficherNation(Nation);
