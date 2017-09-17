@@ -14,11 +14,12 @@ int main( int argc, char* args[] )
     printf("\nReal : \n");
     personnes* real = readRealisateurs();
 
-    printf("%d",real->size);
-
     printf("\n Films :\n");
-    film* films = readFilms(acteurs , real );
+    film* films = readFilms(acteurs, real );
 
+
+    libererPersonnes(acteurs);
+    libererPersonnes(real);
     free(acteurs);
     free(real);
     free(films);

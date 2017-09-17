@@ -9,7 +9,7 @@
 // Lecture du fichier
 personnes* readActeurs();
 personnes* readRealisateurs();
-film* readFilms();
+film* readFilms(personnes* acteurs,  personnes* reals);
 
 // Gestion à faire en mémoire
 personne* getPersonneById(int id, personne* tab, int taille);

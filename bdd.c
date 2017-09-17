@@ -10,7 +10,6 @@
 personne* getPersonneById(int id, personne* tab, int taille){
     int i;
     for( i=0;i<taille;++i){
-        printf("%d ",tab[i].id);
         if(tab[i].id == id){
             return &tab[i];
         }
@@ -28,7 +27,7 @@ personnes* readActeurs(){
     char chaine[MAX];
 
     if(fichier != NULL){
-        int i=0,j=0;
+        int i=0;
         while(fgets(chaine,MAX,fichier)!=NULL){
             pers = realloc(pers,(i+1)*sizeof(personne));
 
@@ -40,12 +39,14 @@ personnes* readActeurs(){
 
             // nom
             mot = strtok(NULL,";");
-            pers[i].nom = mot;
-            printf("%s, ",pers[i].nom);
+            pers[i].nom =(char*) malloc((strlen(mot)+1)*sizeof(char));
+            strcpy(pers[i].nom,mot);
+            printf(" %s, ",pers[i].nom);
 
             // prenom
             mot = strtok(NULL,";");
-            pers[i].prenom = mot;
+            pers[i].prenom=(char*) malloc((strlen(mot)+1)*sizeof(char));
+            strcpy(pers[i].prenom , mot);
             printf("%s, ",pers[i].prenom);
 
             // jour
@@ -70,13 +71,15 @@ personnes* readActeurs(){
             printf("Nation = %d",pers[i].nation);
 
             printf("\n");
-            j++;
+            i++;
         }
         fclose(fichier);
 
+
         personnes* p = malloc(sizeof(personnes));
         p->pers = pers;
-        p->size =j;
+
+        p->taille =i;
 
         return p;
     }
@@ -94,7 +97,7 @@ personnes* readRealisateurs(){
     char chaine[MAX];
 
     if(fichier != NULL){
-        int i=0,j=0;
+        int i=0;
         while(fgets(chaine,MAX,fichier)!=NULL){
             pers = realloc(pers,(i+1)*sizeof(personne));
 
@@ -106,12 +109,14 @@ personnes* readRealisateurs(){
 
             // nom
             mot = strtok(NULL,";");
-            pers[i].nom = mot;
+            pers[i].nom =(char*) malloc(strlen(mot)*sizeof(char));
+            strcpy(pers[i].nom,mot);
             printf(" %s, ",pers[i].nom);
 
             // prenom
             mot = strtok(NULL,";");
-            pers[i].prenom = mot;
+            pers[i].prenom=(char*) malloc(strlen(mot)*sizeof(char));
+            strcpy(pers[i].prenom , mot);
             printf("%s, ",pers[i].prenom);
 
             // jour
@@ -134,13 +139,14 @@ personnes* readRealisateurs(){
             printf("Nation = %d",pers[i].nation);
 
             printf("\n");
-            j++;
+            i++;
         }
         fclose(fichier);
 
         personnes* p = malloc(sizeof(personnes));
         p->pers = pers;
-        p->size =j;
+
+        p->taille =i;
 
         return p;
     }
@@ -150,7 +156,7 @@ personnes* readRealisateurs(){
     return NULL;
 }
 
-film* readFilms(personnes* acteurs, personnes* reals){
+film* readFilms(personnes* acteurs,  personnes* reals){
     FILE* fichier = NULL;
     fichier = fopen("films.csv","r");
     film* films = malloc(sizeof(film));
@@ -158,7 +164,9 @@ film* readFilms(personnes* acteurs, personnes* reals){
     char chaine[MAX];
 
     if(fichier != NULL){
-        int i=0;
+        int i=0,j,k;
+        char temp[MAX], *temp2, *act;
+
         while(fgets(chaine,MAX,fichier)!=NULL){
             films = realloc(films,(i+1)*sizeof(film));
 
@@ -180,28 +188,43 @@ film* readFilms(personnes* acteurs, personnes* reals){
 
            // real
             mot = strtok(NULL,";");
-            films[i].real = getPersonneById((unsigned int) strtol(mot,(char**)NULL,10), reals->pers, reals->size);
+            films[i].real = getPersonneById((unsigned int) strtol(mot,(char**)NULL,10), reals->pers, reals->taille);
             if(films[i].real !=NULL){
-                printf(" Real = %s/",films[i].real->nom);
+                printf(" Real = %s ,",films[i].real->nom);
+            } else printf("Erreur");
+
+            // acteurs
+
+            mot = strtok(NULL,";");
+            strcpy(temp,mot);
+            strcpy(temp2,mot);
+            mot = strtok(NULL,";");
+            char* last = strtok(NULL,";");
+
+            printf("%s",mot);
+            for (j=0; temp2[j]; temp2[j]==',' ? j++ : *temp2++);
+            act = strtok(temp,",");
+            for(k=0;k<=j;k++){
+                films[i].acteurs[k] = getPersonneById((unsigned int) strtol(act,(char**)NULL,10), acteurs->pers,acteurs->taille);
+                printf("%s ",films[i].acteurs[k]->nom);
+
+                if(k==j-1){
+                    act = strtok(NULL,";");
+                }
+                else if(k!=j){
+                    act = strtok(NULL,",");
+                }
             }
-            // acteur 1
- /*
-            mot = strtok(NULL,",");
-            films[i].acteurs[0] = getPersonneById((unsigned int) strtol(mot,(char**)NULL,10), acteurs->pers,acteurs->size);
-            printf("%s/",films[i].acteurs[0]->nom);
-*/
+            printf(", ");
+
             // durée
-            mot = strtok(NULL,";");
-            printf("%s,",mot);
 
 
-            mot = strtok(NULL,";");
-            films[i].duree = (int) strtol(mot,(char**)NULL,10);
+            films[i].duree = (unsigned int) strtol(mot,(char**)NULL,10);
             printf("%d, ",films[i].duree);
 
             // Genre
-            mot = strtok(NULL,";");
-            films[i].genre = (Genre) ((int) strtol(mot,(char**)NULL,10));
+            films[i].genre = (Genre) ((int) strtol(last,(char**)NULL,10));
             printf("Genre = %d",films[i].genre);
 
             printf("\n");
@@ -213,5 +236,13 @@ film* readFilms(personnes* acteurs, personnes* reals){
         printf("Erreur d'ouverture du fichier");
     }
     return NULL;
+}
+
+void libererPersonnes(personnes* p){
+    int i;
+    for(i=0;i<p->taille;++i){
+        free(p->pers[i].nom);
+        free(p->pers[i].prenom);
+    }
 }
 

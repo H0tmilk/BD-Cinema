@@ -34,7 +34,7 @@ typedef struct film {
 
 typedef struct personnes{
     personne* pers;
-    int size;
+    int taille;
 } personnes;
 
 #endif
