@@ -4,24 +4,28 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "data_struct.h"
+#include "data-struct.h"
 
 // Lecture du fichier
-void readActeurs(personne*);
-void readRealisateurs(personne*);
-void readFilms(film*);
+personnes* readActeurs();
+personnes* readRealisateurs();
+Films* readFilms(personnes* acteurs,  personnes* reals);
 
 // Gestion à faire en mémoire
-personne* getActeurById(int);
-personne* getRealById(int);
+personne* getPersonneById(int id, personne* tab, int taille);
 
 void afficherFilm(film);
-void afficherNation(Nation);
+void afficherFilmPtr(film*);
+void afficherFilms(Films*);
 void afficherPersonne(personne);
+void afficherPersonnes(personnes*);
 
-film rechercherFilm(char* film);
+film* searchFilm(int id, film* films, int taille);
+film* searchFilmByName( char*, Films*, int taille);
 personne rechercherActeur(char* acteur);
 personne rechecherReal(char* real);
+
+void libererPersonnes(personnes* p);
 
 // void ajouterFilm();
 // void supprimerActeur();
