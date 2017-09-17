@@ -7,8 +7,8 @@
 #include "data-struct.h"
 
 // Lecture du fichier
-personne* readActeurs();
-personne* readRealisateurs();
+personnes* readActeurs();
+personnes* readRealisateurs();
 film* readFilms();
 
 // Gestion à faire en mémoire
