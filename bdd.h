@@ -3,40 +3,30 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-#include "data-struct.h"
+#include "data_struct.h"
 
 // Lecture du fichier
 personnes* readActeurs();
 personnes* readRealisateurs();
-Films* readFilms(personnes* acteurs,  personnes* reals);
+Films* readFilms(personnes*,  personnes*);
 
 // Gestion à faire en mémoire
-personne* getPersonneById(int id, personne* tab, int taille);
+personne* getPersonneById(int, personne*, int);
 
 void afficherFilm(film);
 void afficherFilmPtr(film*);
 void afficherFilms(Films*);
 void afficherPersonne(personne);
+void afficherPersonnePtr(personne* p);
 void afficherPersonnes(personnes*);
 
-film* searchFilm(int id, film* films, int taille);
-film* searchFilmByName( char*, film*, int taille);
-personne rechercherActeur(char* acteur);
-personne rechecherReal(char* real);
+film* searchFilm(int, film*, int);
+film* searchFilmByName(char*, film*, int);
+personne* searchPersonneByName(char*, personne*, int);
 
-void libererPersonnes(personnes* p);
-void libererFilms(Films* f);
-
-// void ajouterFilm();
-// void supprimerActeur();
-// void ajouterRealisateur();
-// void supprimerRealisateur();
-// void supprimerFilm();
-
-// Ecriture fichiers
-// void sauvegarderFilms();
-// void sauvegarderActeurs();
-// void sauvegarderReals();
+void libererPersonnes(personnes*);
+void libererFilms(Films*);
 
 #endif

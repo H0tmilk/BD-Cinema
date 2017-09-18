@@ -1,15 +1,14 @@
-#ifndef data-struct
-#define data-struct
+#ifndef data_struct_H
+#define data_struct_H
 
 // On se limite aux genres que nous utiliserons
-typedef enum Genre {ACTION=0, HORREUR, COMEDIE, DOCUMENTAIRE, POLICIER, DRAME, ANIMATION,SCIENCEFICTION} Genre;
+typedef enum Genre {ACTION=0, COMEDIE, DRAME, SCIENCEFICTION} Genre;
 
 // On se limite aux nations que nous utiliserons
 typedef enum Nation{FRANCE = 0, USA, UK, CANADA} Nation;
 
 static char* nationalites[] = { "francaise", "americaine", "anglaise", "canadienne" };
-static char* genres[] = { "Action", "Horreur", "Comedie", "Documentaire",
-		"Policier", "Drame", "Animation", "Science-fiction" };
+static char* genres[] = { "Action", "Comedie", "Drame", "Science-fiction" };
 
 typedef struct date {
     int annee;

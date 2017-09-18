@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "data-struct.h"
+#include "data_struct.h"
 
 #define MAX 100
 
@@ -57,7 +57,6 @@ personnes* readActeurs(){
 
             // Nation
             mot = strtok(NULL,";");
-
             pers[i].nation = (unsigned int) strtol(mot,(char**)NULL,10);
 
             i++;
@@ -243,7 +242,7 @@ film* searchFilm(int id, film* films, int taille){
 film* searchFilmByName(char* titre, film* f, int taille){
     int i = 0;
     while( i < taille){
-        if(strcmp(titre, f[i].titre)==0){
+        if(strstr(f[i].titre, titre) != NULL){
             return &f[i];
         }
         i++;
@@ -251,6 +250,16 @@ film* searchFilmByName(char* titre, film* f, int taille){
     return NULL;
 }
 
+personne* searchPersonneByName(char* s, personne* p, int taille) {
+  int i = 0;
+  while( i < taille){
+      if(strstr(p[i].nom, s) != NULL || strstr(p[i].prenom, s) != NULL){
+          return &p[i];
+      }
+      i++;
+  }
+  return NULL;
+}
 
 void afficherFilm(film f) {
   printf("%s (%d)\n", f.titre, f.an_sortie);
@@ -303,6 +312,13 @@ void afficherPersonne(personne p) {
   printf("Nationalité : %s\n", nationalites[p.nation]);
 }
 
+void afficherPersonnePtr(personne* p) {
+  printf("Nom : %s %s\n", p->prenom, p->nom);
+  printf("Date de naissance : %02d/%02d/%02d\n", p->naissance.jour, p->naissance.mois,
+    p->naissance.annee);
+  printf("Nationalité : %s\n", nationalites[p->nation]);
+}
+
 void afficherPersonnes(personnes* pers) {
   int i;
   for (i = 0; i < pers->taille; i++) {
@@ -310,4 +326,3 @@ void afficherPersonnes(personnes* pers) {
     printf("\n");
   }
 }
-

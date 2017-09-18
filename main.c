@@ -1,8 +1,6 @@
-// Librairie SDL au cas où le temps le permettrait
-//#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "data-struct.h"
+#include "data_struct.h"
 #include "bdd.h"
 
 int main( int argc, char* args[] )
@@ -15,10 +13,12 @@ int main( int argc, char* args[] )
   	printf("============= Cine Info =============");
   	do {
   		printf("\n\nChoisissez une action en tapant son numéro :\n");
-  		printf("1 - Afficher la liste de tous les films\n");
+  		printf("1 - Afficher la listeOCEANS Eleven de tous les films\n");
   		printf("2 - Afficher la liste de tous les acteurs\n");
   		printf("3 - Afficher la liste de tous les realisateurs\n\n");
-  		printf("4 - Rechercher un film\n\n");
+  		printf("4 - Rechercher un film\n");
+      printf("5 - Rechercher un acteur\n");
+      printf("6 - Rechercher un realisateur\n\n");
       fflush(stdin);
   		ret = scanf(" %d", &rep);
   		printf("\n");
@@ -47,7 +47,7 @@ int main( int argc, char* args[] )
   		case 4:
   			printf("Entrez le nom du film que vous voulez rechercher :\n");
         fflush(stdin);
-  			scanf("%s", saisie);
+  			gets(saisie);
         printf("\n");
 				film* f = searchFilmByName(saisie, films->film, films->taille);
 
@@ -57,14 +57,43 @@ int main( int argc, char* args[] )
   			} else {
   				printf("Le film \"%s\" n'existe pas dans notre base de données.\n", saisie);
   			}
+  		break;
+      case 5:
+  			printf("Entrez le nom de l'acteur que vous voulez rechercher :\n");
+        fflush(stdin);
+  			gets(saisie);
+				personne* a = searchPersonneByName(saisie, acteurs->pers, acteurs->taille);
+
+  			if (a != NULL) {
+  				afficherPersonnePtr(a);
+          printf("\n");
+  			} else {
+  				printf("L'acteur \"%s\" n'existe pas dans notre base de données.\n", saisie);
+  			}
 
   		break;
+      case 6:
+        printf("Entrez le nom du realisateur que vous voulez rechercher :\n");
+        fflush(stdin);
+  			gets(saisie);
+        printf("\n");
+        personne* r= searchPersonneByName(saisie, real->pers, real->taille);
+
+        if (r != NULL) {
+          afficherPersonnePtr(r);
+          printf("\n");
+        } else {
+          printf("Le realisateur \"%s\" n'existe pas dans notre base de données.\n", saisie);
+        }
+
+      break;
   	}
 
 
     libererPersonnes(acteurs);
     libererPersonnes(real);
     libererFilms(films);
+    free(saisie);
     free(acteurs);
     free(real);
     free(films);
