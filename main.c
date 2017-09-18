@@ -30,7 +30,7 @@ int main( int argc, char* args[] )
   		getchar();
   	} while(rep > 5 || rep < 1);
 
-  	char saisie[50];
+  	char* saisie;
   	switch (rep) {
   		case 1:
   			printf("== FICHES FILMS ==\n\n");
