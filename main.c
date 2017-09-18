@@ -30,7 +30,7 @@ int main( int argc, char* args[] )
   		getchar();
   	} while(rep > 5 || rep < 1);
 
-  	char* saisie;
+  	char* saisie = malloc(sizeof(char*));
   	switch (rep) {
   		case 1:
   			printf("== FICHES FILMS ==\n\n");
@@ -47,9 +47,9 @@ int main( int argc, char* args[] )
   		case 4:
   			printf("Entrez le nom du film que vous voulez rechercher :\n");
         fflush(stdin);
-  			scanf("%s", &saisie);
+  			scanf("%s", saisie);
         printf("\n");
-				film* f = searchFilmByName(&saisie, films->film, films->taille);
+				film* f = searchFilmByName(saisie, films->film, films->taille);
 
   			if (f != NULL) {
   				afficherFilmPtr(f);

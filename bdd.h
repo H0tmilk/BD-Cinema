@@ -21,7 +21,7 @@ void afficherPersonne(personne);
 void afficherPersonnes(personnes*);
 
 film* searchFilm(int id, film* films, int taille);
-film* searchFilmByName( char*, Films*, int taille);
+film* searchFilmByName( char*, film*, int taille);
 personne rechercherActeur(char* acteur);
 personne rechecherReal(char* real);
 
