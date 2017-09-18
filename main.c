@@ -64,6 +64,7 @@ int main( int argc, char* args[] )
 
     libererPersonnes(acteurs);
     libererPersonnes(real);
+    libererFilms(films);
     free(acteurs);
     free(real);
     free(films);

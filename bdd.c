@@ -222,6 +222,13 @@ void libererPersonnes(personnes* p){
     }
 }
 
+void libererFilms(Films* f){
+    int i;
+    for(i=0;i<f->taille;++i){
+        free(f->film[i].titre);
+    }
+}
+
 film* searchFilm(int id, film* films, int taille){
     int i = 0;
     while( i<taille){
@@ -303,3 +310,4 @@ void afficherPersonnes(personnes* pers) {
     printf("\n");
   }
 }
+

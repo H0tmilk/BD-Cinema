@@ -26,6 +26,7 @@ personne rechercherActeur(char* acteur);
 personne rechecherReal(char* real);
 
 void libererPersonnes(personnes* p);
+void libererFilms(Films* f);
 
 // void ajouterFilm();
 // void supprimerActeur();
