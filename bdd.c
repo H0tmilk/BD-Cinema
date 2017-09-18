@@ -233,12 +233,11 @@ film* searchFilm(int id, film* films, int taille){
     return NULL;
 }
 
-film* searchFilmByName(char* titre, Films* films, int taille){
+film* searchFilmByName(char* titre, film* f, int taille){
     int i = 0;
-    printf("%d", taille);
     while( i < taille){
-        if(strcmp(titre, films->film[i].titre)==0){
-            return &films->film[i];
+        if(strcmp(titre, f[i].titre)==0){
+            return &f[i];
         }
         i++;
     }

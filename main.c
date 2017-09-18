@@ -5,7 +5,6 @@
 #include "data-struct.h"
 #include "bdd.h"
 
-
 int main( int argc, char* args[] )
 {
     personnes* acteurs = readActeurs();
@@ -20,6 +19,7 @@ int main( int argc, char* args[] )
   		printf("2 - Afficher la liste de tous les acteurs\n");
   		printf("3 - Afficher la liste de tous les realisateurs\n\n");
   		printf("4 - Rechercher un film\n\n");
+      fflush(stdin);
   		ret = scanf(" %d", &rep);
   		printf("\n");
   		// S'il y a une erreur avec le scanf
@@ -30,7 +30,7 @@ int main( int argc, char* args[] )
   		getchar();
   	} while(rep > 5 || rep < 1);
 
-  	char* saisie;
+  	char saisie[50];
   	switch (rep) {
   		case 1:
   			printf("== FICHES FILMS ==\n\n");
@@ -46,12 +46,14 @@ int main( int argc, char* args[] )
   		break;
   		case 4:
   			printf("Entrez le nom du film que vous voulez rechercher :\n");
+        fflush(stdin);
   			scanf("%s", &saisie);
-
-				film* f = searchFilmByName(saisie, films, films->taille);
+        printf("\n");
+				film* f = searchFilmByName(&saisie, films->film, films->taille);
 
   			if (f != NULL) {
   				afficherFilmPtr(f);
+          printf("\n");
   			} else {
   				printf("Le film \"%s\" n'existe pas dans notre base de données.\n", saisie);
   			}
