@@ -253,7 +253,7 @@ film* searchFilmByName(char* titre, film* f, int taille){
 personne* searchPersonneByName(char* s, personne* p, int taille) {
   int i = 0;
   while( i < taille){
-      if(strstr(p[i].nom, s) != NULL || strstr(p[i].prenom, s) != NULL){
+      if(strstr(s, p[i].nom) != NULL || strstr(s,p[i].prenom) != NULL){
           return &p[i];
       }
       i++;

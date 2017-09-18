@@ -26,6 +26,7 @@ film* searchFilm(int, film*, int);
 film* searchFilmByName(char*, film*, int);
 personne* searchPersonneByName(char*, personne*, int);
 
+// Liberations mémoire
 void libererPersonnes(personnes*);
 void libererFilms(Films*);
 
